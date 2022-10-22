@@ -3,6 +3,7 @@ import sys
 # Create your views here.
 
 #create index fuction
+file_path=''
 
 def index(request):
     return render(request, 'index.html')
@@ -31,7 +32,8 @@ def runcode(request):
         except Exception as e:
             #to return error in the code
             sys.stdout = original_stdout
-            output = 0
+            output = e
     #finally return and render indexpage and send codedata and output to show on page
-    
+
     return render(request,'index.html',{"code":codeareadata, "output":output})
+
