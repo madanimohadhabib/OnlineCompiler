@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.min.css" integrity="sha512-ZOZcMHkHfVIzrsVp4h8FzPiZc5n9tcuM+fKwPvz/dEHcfZJYVzukAJ9TqGaTijQVySEqQ02BRDX+XjPslxB8Aw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.min.js" integrity="sha512-FTEUWSdvusp7brvA5viQQB4I/vO+r6Z86Ag0XXnfKg9ob+WxG+ZylZSkQyjPUgOWejEWqkgOXk5BP2qQXYINhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/mode/python/python.min.js" integrity="sha512-ccH9hsnuXxYtirslEOBqartIni0Msc7JmX0Y8P+vRI7iMb2sqomTCampYRkRZ7m0in4zHZFg+xDsw3elQ1MK5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+   
   </head>
 
   <body class="bg-dark" style="font-family:Verdana">
@@ -31,10 +33,16 @@
           <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode===1){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{code}}</textarea>
         </div>
         <script>
-          var editor = CodeMirror.fromTextArea(document.getElementById('codearea'),{
-            mode: 'python',
-            linenumbers: true,
-          })
+          var editor = CodeMirror.fromTextArea(document.getElementById("codearea"), {
+            mode: {
+                name: "python",
+                version: 3,
+                singleLineStringErrors: false
+            },
+            lineNumbers: true,
+            indentUnit: 4,
+            matchBrackets: true
+            });
         </script>
         <button type="submit" class="btn btn-primary" style="margin-left:50px">Run Code</button>
         <div class="form-group" style="margin-left:50px; margin-right:50px">
@@ -46,5 +54,7 @@
             <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{output}}</textarea>
         </div>
       </form>
+
+      
   </body>
 </html>
