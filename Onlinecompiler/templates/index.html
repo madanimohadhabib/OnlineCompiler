@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,58 +11,40 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <title>Coderex</title>
-
-
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.min.css" integrity="sha512-ZOZcMHkHfVIzrsVp4h8FzPiZc5n9tcuM+fKwPvz/dEHcfZJYVzukAJ9TqGaTijQVySEqQ02BRDX+XjPslxB8Aw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.min.js" integrity="sha512-FTEUWSdvusp7brvA5viQQB4I/vO+r6Z86Ag0XXnfKg9ob+WxG+ZylZSkQyjPUgOWejEWqkgOXk5BP2qQXYINhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/mode/python/python.min.js" integrity="sha512-ccH9hsnuXxYtirslEOBqartIni0Msc7JmX0Y8P+vRI7iMb2sqomTCampYRkRZ7m0in4zHZFg+xDsw3elQ1MK5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
+
   <body class="bg-dark" style="font-family:Verdana">
     <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-
       <a class="navbar-brand" href="http://127.0.0.1:8000/"  >
         {% load static %}
-        <img src="{% static 'static/logo.png' %}" />
-        Coderex</a>
-        <a class="navbar-brand" href="#" data-toggle="modal" data-target="#exampleModalCenter">Save File</a>
+        <img src="{% static 'static/logo.png' %}" style="height:45px;" /></a>
     </nav><br>
-
-
-    <!-- Modal Save File -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">File Python</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Do you want to save your file?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-info">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
 
     <form action="/runcode" method="post" >
         {% csrf_token %}
         <div class="form-group" style="margin-left:50px; margin-right:50px" >
           <label for="codearea" style="color: #e3f2fd;">Your Code</label>
-          <textarea type="text"  class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode===1){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">
-            {{ code }}</textarea>
+          <textarea type="text" class="form-control" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode===1){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{code}}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="margin-left:50px">Run</button>
+        <script>
+          var editor = CodeMirror.fromTextArea(document.getElementById('codearea'),{
+            mode: 'python',
+            linenumbers: true,
+          })
+        </script>
+        <button type="submit" class="btn btn-primary" style="margin-left:50px">Run Code</button>
+        <div class="form-group" style="margin-left:50px; margin-right:50px">
+          <label for="output" style="color: #e3f2fd;">Input</label>
+          <textarea type="text" class="form-control" id="input" name="input" rows="2">{{input}}</textarea>
+        </div>
         <div class="form-group" style="margin-left:50px; margin-right:50px">
             <label for="output" style="color: #e3f2fd;">Output</label>
-            <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{ output }}</textarea>
-
+            <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{output}}</textarea>
         </div>
-
       </form>
-
-
-
   </body>
 </html>
