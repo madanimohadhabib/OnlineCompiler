@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.min.css" integrity="sha512-ZOZcMHkHfVIzrsVp4h8FzPiZc5n9tcuM+fKwPvz/dEHcfZJYVzukAJ9TqGaTijQVySEqQ02BRDX+XjPslxB8Aw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/codemirror.min.js" integrity="sha512-FTEUWSdvusp7brvA5viQQB4I/vO+r6Z86Ag0XXnfKg9ob+WxG+ZylZSkQyjPUgOWejEWqkgOXk5BP2qQXYINhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/mode/python/python.min.js" integrity="sha512-ccH9hsnuXxYtirslEOBqartIni0Msc7JmX0Y8P+vRI7iMb2sqomTCampYRkRZ7m0in4zHZFg+xDsw3elQ1MK5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   
-   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/theme/monokai.min.css" integrity="sha512-xTAcmDh9LVfdwYnQWuOwTc/pjzAOp5ErJU4VXB8uV7SJblCftdXHFY7q1yhZudlxsPg0VcNJlgE5cVAHxdGYdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/theme/dracula.min.css" integrity="sha512-PqtRKc9nbcvvS3Wn6UqlHTt+mXqygXoi5Cf3DlbzHQ1Bh8Oy1jy/T9hLXm3Y7Zaws9EeZpzjwgUYiTrqJRIeKg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/theme/icecoder.min.css" integrity="sha512-oGrnp4kO2prdwhtUDtRu4KEJHu+y3cGR0GlDBwxk5qgZDKimbLyLgptBKhKFwqjf5+ee1hZGhmH3dvOq/0byGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
 
   <body class="bg-dark" style="font-family:Verdana">
@@ -39,6 +40,7 @@
                 version: 3,
                 singleLineStringErrors: false
             },
+            theme: "monokai",
             lineNumbers: true,
             indentUnit: 4,
             matchBrackets: true
@@ -51,7 +53,7 @@
         </div>
         <div class="form-group" style="margin-left:50px; margin-right:50px">
             <label for="output" style="color: #e3f2fd;">Output</label>
-            <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled>{{output}}</textarea>
+            <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled >{{output}}</textarea>
         </div>
       </form>
 
