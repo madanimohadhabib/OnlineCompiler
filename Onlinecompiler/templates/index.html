@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,14 +49,13 @@
         <button type="submit" class="btn btn-primary" style="margin-left:50px">Run Code</button>
         <div class="form-group" style="margin-left:50px; margin-right:50px">
           <label for="output" style="color: #e3f2fd;">Input</label>
-          <textarea type="text" class="form-control" id="input" name="input" rows="2">{{input}}</textarea>
+          <textarea type="text" class="form-control" id="input" name="input" rows="2" style="color:blue">{{input}}</textarea>
         </div>
+
         <div class="form-group" style="margin-left:50px; margin-right:50px">
-            <label for="output" style="color: #e3f2fd;">Output</label>
-            <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled >{{output}}</textarea>
+          <label for="output" style="color: #e3f2fd;">Output</label>
+          <textarea type="text" class="form-control" id="output" name="output" rows="4" disabled style="color:green" >{{output}}</textarea>
         </div>
       </form>
-
-      
   </body>
 </html>
