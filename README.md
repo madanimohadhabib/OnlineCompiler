@@ -8,15 +8,11 @@
   ```
   cd Onlinecompiler
   ```
-3) Create virtualenv based on your own system:
-  ```
-  python3 -m venv venv
-  ```
-4) Pipe requirements to venv folder:
+3) Pipe requirements to Onlinecompiler folder:
   ```
   pip install -r requirements.txt
   ```
-5) Run Django app:
+4) Run Django app:
   ```
   py manage.py runserver
   ```
