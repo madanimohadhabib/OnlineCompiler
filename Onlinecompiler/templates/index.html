@@ -17,13 +17,18 @@
     <link rel=stylesheet href="{% static 'static/codemirror/doc/docs.css' %}">
     <link rel="stylesheet" href="{% static 'static/codemirror/addon/hint/simple-hint.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.16.0/theme/monokai.min.css" integrity="sha512-xTAcmDh9LVfdwYnQWuOwTc/pjzAOp5ErJU4VXB8uV7SJblCftdXHFY7q1yhZudlxsPg0VcNJlgE5cVAHxdGYdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="{% static 'static/codemirror/addon/lint/lint.css' %}">
    <!-- CodeMirror Script -->
     <script src="{% static 'static/codemirror/lib/codemirror.js' %}"></script>
     <script src="{% static 'static/codemirror/addon/edit/matchbrackets.js' %}"></script>
     <script src="{% static 'static/codemirror/addon/hint/python-hint.js' %}"></script>
     <script src="{% static 'static/codemirror/addon/hint/simple-hint.js' %}"></script>
     <script src="{% static 'static/codemirror/mode/python/python.js' %}"></script>
+    <script src="{% static 'static/codemirror/addon/lint/lint.js' %}"></script>
+    <script src="{% static 'static/codemirror/addon/lint/javascript-lint.js' %}"></script>
+  
+   <!-- Script -->
+    <script src="{% static 'static/js/cm-validator-remote.js' %}"></script>
   </head>
 
   <body class="bg-dark" style="font-family:Verdana">
@@ -35,6 +40,10 @@
 
     <form action="/runcode" method="post" >
         {% csrf_token %}
+        <select name ="languages" class="btn btn-primary"  style="margin-left:50px; margin-right:50px">
+            <option value="python" class="btn btn-primary">Python</option>
+        
+        </select>
         <div class="form-group" style="margin-left:50px; margin-right:50px" >
           <label for="codearea" style="color: #e3f2fd;">Your Code</label>
           <textarea type="text" class="form-control" id="codearea" name="codearea" rows="6" onkeydown="if(event.keyCode===1){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">{{code}}</textarea>
@@ -51,6 +60,7 @@
         </div>
       </form>
     <script>
+    
       var editor = CodeMirror.fromTextArea(document.getElementById("codearea"), {
         mode: {
             name: "python",
@@ -63,18 +73,17 @@
         matchBrackets: true,
         styleActiveLine: true,
         highlightSelectionMatches: true,
-        autoCloseTags: true,
         lineWrapping: true,
         extraKeys: {
           "Ctrl-i": "autocomplete",
         },
         foldGutter: true,
         gutters: ['CodeMirror-lint-markers'],
-        lint: true,
+        
         
         });
-        CodeMirror.commands.autocomplete = function(cm) {
-          CodeMirror.simpleHint(cm, CodeMirror.pythonHint);
+        CodeMirror.commands.autocomplete = function(editor) {
+          CodeMirror.simpleHint(editor, CodeMirror.pythonHint);
           }
         editor.on('keyup', function(editor, event){
           // type code and show autocomplete hint in the meanwhile
